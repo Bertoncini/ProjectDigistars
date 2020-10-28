@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body bg-light">
+        <h2>Problema do conjunto e seus elementos únicos</h2>
+        <mat-horizontal-stepper #stepper linear (click)="bloqueiaNavegacao()">
+            <mat-step completed="false">
+                <ng-template matStepLabel>Entrada N</ng-template>
+                <mat-form-field>
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput type="number" placeholder="Qtd de número da entrada K" [(ngModel)]='entradaN'
+                        (keydown.enter)="avancar()">
+                </mat-form-field>
+                <div>
+                    <button mat-button (click)="avancar()">Avançar</button>
+                </div>
+            </mat-step>
+            <mat-step completed="false">
+                <ng-template matStepLabel>Entrada K</ng-template>
+                <mat-form-field>
+                    <mat-label>Valor K</mat-label>
+                    <input matInput placeholder="Valor de entrada K" (keydown.enter)=adicionarEntradaK($event)>
+                </mat-form-field>
+                <div class="card col-2 scroll">
+                    <div class="card-body">
+                        <h5 *ngFor="let valorK of entradaK" class="text-center col-12">{{valorK}}</h5>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button (click)="voltar()">Voltar</button>
+                    <button mat-button (click)="avancar()">Avançar</button>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="card col-2 scroll mx-2">
+                            <div class="card-header text-center">
+                                ENTRADA
+                            </div>
+                            <div class="card-body">
+                                <h5 *ngFor="let entrada of previewEntrada" class="text-center col-12">{{entrada}}</h5>
+                            </div>
+                        </div>
+                        <div class="card col-2 scroll mx-2">
+                            <div class="card-header text-center">
+                                SAIDA
+                            </div>
+                            <div class="card-body">
+                                <h5 *ngFor="let saida of previewSaida" class="text-center col-12">{{saida}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Voltar</button>
+                    <button mat-button (click)="stepper.reset()">Finalizar</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</div>

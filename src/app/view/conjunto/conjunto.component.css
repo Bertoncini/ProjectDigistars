@@ -1,0 +1,8 @@
+.scroll {
+    min-height: 20vw !important;
+    max-height: 20vw !important;
+    overflow-y: auto;
+}
+.mat-step-header {
+    pointer-events: none;
+}

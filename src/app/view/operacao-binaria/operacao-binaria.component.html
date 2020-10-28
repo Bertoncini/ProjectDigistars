@@ -1,0 +1,158 @@
+<div>
+    <div class="card">
+        <div class="card-body bg-light">
+            <h2 class="text-center">Calculadora de Binários</h2>
+            <div class="card-body bg-dark">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="row mb-4">
+                                            <div class="col">
+                                                <input type="text" [(ngModel)]="binarioA" mask="00000000" maxlength="8"
+                                                    class="form-control form-control-lg"
+                                                    [ngClass]="{'is-valid': validarBinarioA(binarioA), 'is-invalid': !validarBinarioA(binarioA)}"
+                                                    placeholder="Digite um binário">
+                                                <div class="invalid-tooltip">
+                                                    {{msgErroBinarioA}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row mt-4 mb-4">
+                                            <div class="col">
+                                                <input type="text" [(ngModel)]="binarioB" mask="00000000" maxlength="8"
+                                                    class="form-control form-control-lg "
+                                                    [ngClass]="{'is-valid': validarBinarioB(binarioB), 'is-invalid': !validarBinarioB(binarioB)}"
+                                                    placeholder="Digite um binário">
+                                                <div class="invalid-tooltip">
+                                                    {{msgErroBinarioB}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="row mt-4">
+                                            <div class="col">
+                                                <input type="text" disabled class="form-control form-control-lg"
+                                                    [(ngModel)]="resultadoBinario" placeholder="00000100">
+                                            </div>
+                                        </div>
+                                        <button (click)="limpar()"
+                                            class="btn mt-3 btn-outline-dark col-12"><strong>LIMPAR</strong></button>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="card">
+                                            <div class="card-body bg-dark">
+                                                <button (click)="calcular('+')"
+                                                    class="btn col-12 btn-sm btn-outline-light"
+                                                    [disabled]="camposPreenchidos() == false">
+                                                    <span class="font-weight-bold center h4">+</span>
+                                                </button>
+                                                <button (click)="calcular('-')"
+                                                    class="btn col-12 btn-sm mt-3 btn-outline-light"
+                                                    [disabled]="camposPreenchidos() == false">
+                                                    <span class="font-weight-bold h4">-</span>
+                                                </button>
+                                                <button (click)="calcular('*')"
+                                                    class="btn col-12 btn-sm mt-3 btn-outline-light"
+                                                    [disabled]="camposPreenchidos() == false">
+                                                    <span class="font-weight-bold h4">x</span>
+                                                </button>
+                                                <button (click)="calcular('/')"
+                                                    class="btn col-12 btn-sm mt-3 btn-outline-light"
+                                                    [disabled]="camposPreenchidos() == false">
+                                                    <span class="font-weight-bold h4">/</span>
+                                                </button>
+                                                <button (click)="calcular('%')"
+                                                    class="btn col-12 btn-sm mt-3 btn-outline-light"
+                                                    [disabled]="camposPreenchidos() == false">
+                                                    <span class="font-weight-bold h4">%</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 text-center">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3>BINÁRIOS</h3>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="col-12">
+                                                            <strong>Entrada</strong>
+                                                        </div>
+                                                        <textarea class="resize-no" disabled cols="20" rows="4">
+        {{binarioValido(binarioA) ? binarioA : '--'}}
+        {{operador}}
+        {{binarioValido(binarioB) ? binarioB : '--'}}
+                                </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-1">
+                                                    <div class="col">
+                                                        <div class="col-12">
+                                                            <strong>Saida</strong>
+                                                        </div>
+                                                        <textarea class="resize-no" disabled cols="20" rows="2">
+      {{resultadoBinario}}
+                                </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3>NÚMEROS</h3>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="col-12">
+                                                            <strong>Entrada</strong>
+                                                        </div>
+                                                        <textarea class="resize-no" disabled cols="20" rows="4">
+        {{binarioValido(binarioA) ? conversor.binaryToInt(binarioA) : '--'}}
+        {{operador}}
+        {{binarioValido(binarioB) ? conversor.binaryToInt(binarioB) : '--'}}
+                                </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-1">
+                                                    <div class="col">
+                                                        <div class="col-12">
+                                                            <strong>Saida</strong>
+                                                        </div>
+                                                        <textarea class="resize-no" disabled cols="20" rows="2">
+        {{binarioValido(binarioB) ? conversor.binaryToInt(this.resultadoBinario) : '--'}}
+                                </textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
